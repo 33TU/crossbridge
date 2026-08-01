@@ -110,5 +110,5 @@ compatible standalone player or another Flash-capable runtime environment.
 ## Licensing
 
 CrossBridge and its bundled third-party components retain their respective
-licenses. Review [`LICENSE`](LICENSE) and the license files distributed with
+licenses. Review [`LICENSE.md`](LICENSE.md) and the license files distributed with
 individual components before redistributing modified SDKs or container images.
