@@ -28,9 +28,9 @@
 
 T02: check
 	@echo "-------- Sample 2 --------"
-	@echo "First let's compile it as a projector:"
-	"$(FLASCC)/usr/bin/gcc" $(BASE_CFLAGS) hellointerop.c -o hellointerop.exe
-	@echo "Now lets compile it as a SWF:"
+	@echo "Compiling C interop as an executable:"
+	"$(FLASCC)/usr/bin/gcc" $(BASE_CFLAGS) hellointerop.c -o hellointerop
+	@echo "Compiling C interop as a SWF:"
 	"$(FLASCC)/usr/bin/gcc" $(BASE_CFLAGS) hellointerop.c -emit-swf -swf-version=$(SWF_VERSION) -swf-size=$(SWF_SIZE) -o hellointerop.swf
 	@echo "Some more advanced C++ interop:"
 	"$(FLASCC)/usr/bin/g++" $(BASE_CFLAGS) c++interop.cpp -emit-swf -swf-version=$(SWF_VERSION) -swf-size=$(SWF_SIZE) -lFlash++ -lAS3++ -o c++interop.swf
@@ -40,4 +40,4 @@ T02: check
 include ../Makefile.common
 
 clean:
-	rm -f *.swf *.bc *.exe
+	rm -f hellointerop *.swf *.bc *.exe

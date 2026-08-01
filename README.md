@@ -10,7 +10,7 @@ usable on modern Linux, macOS, and Windows systems through Docker.
 ## Features
 
 - LLVM-GCC 4.2 compiler with an Adobe AVM2 backend
-- C and C++ compilation to SWF, SWC, and projector executables
+- C and C++ compilation to native executables, SWF, and SWC
 - POSIX threads and OpenMP support
 - SWIG-generated ActionScript interoperability
 - GDB support for debugging code running in Flash Player

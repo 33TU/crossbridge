@@ -45,7 +45,7 @@ T12: check
 		Console.as -outdir . -out Console
 
 	java -jar $(call nativepath, $(FLASCC)/usr/lib/as3wig.jar) -i AGAL.abc -o AGAL
-	"$(FLASCC)/usr/bin/g++" AGAL.cpp -c -emit-llvm &> AGAL.txt
+	"$(FLASCC)/usr/bin/g++" AGAL.cpp -c -emit-llvm > AGAL.txt 2>&1
 
 	"$(FLASCC)/usr/bin/g++" $(BASE_CFLAGS) -fllvm-llc-opt=-ascopt=-import -fllvm-llc-opt=-ascopt=$(call nativepath,AGAL.abc) -I. AGAL.o stage3d.cpp AGAL.abc -lAS3++ -lFlash++ \
 		-O4 -flto-api=exports.txt -symbol-abc=Console.abc -emit-swf -swf-version=$(SWF_VERSION) -swf-size=$(SWF_SIZE) -o stage3d.swf

@@ -28,8 +28,8 @@
 
 T01: check
 	@echo "-------- Sample 1 --------"
-	@echo "Compiling C EXE ..."
-	"$(FLASCC)/usr/bin/gcc" $(BASE_CFLAGS) hello.c -o hello.exe
+	@echo "Compiling C executable ..."
+	"$(FLASCC)/usr/bin/gcc" $(BASE_CFLAGS) hello.c -o hello
 	@echo "Compiling C SWF (Debug) ..."
 	"$(FLASCC)/usr/bin/gcc" $(BASE_CFLAGS) hello.c -g -emit-swf -swf-version=$(SWF_VERSION) -swf-size=$(SWF_SIZE) -o hello-debug.swf
 	@echo "Generating C Exports.txt ..."
@@ -38,8 +38,8 @@ T01: check
 	"$(FLASCC)/usr/bin/nm" hello.o | grep ' T ' | sed 's/.*__/_/' | sed 's/.* T //' >> exports.txt
 	@echo "Compiling C SWF (LTO) with save-temporary-files ..."
 	"$(FLASCC)/usr/bin/gcc" $(BASE_CFLAGS) hello.c -flto-api=exports.txt -save-temps -emit-swf -swf-version=$(SWF_VERSION) -swf-size=$(SWF_SIZE) -o hello-lto.swf
-	@echo "Compiling CPP EXE ..."
-	"$(FLASCC)/usr/bin/g++" $(BASE_CFLAGS) hello.cpp -o hello-cpp.exe
+	@echo "Compiling CPP executable ..."
+	"$(FLASCC)/usr/bin/g++" $(BASE_CFLAGS) hello.cpp -o hello-cpp
 	@echo "Compiling CPP SWF (Debug) ..."
 	"$(FLASCC)/usr/bin/g++" $(BASE_CFLAGS) hello.cpp -g -emit-swf -swf-version=$(SWF_VERSION) -swf-size=$(SWF_SIZE) -o hello-cpp-debug.swf
 	@echo "Generating CPP Exports.txt ..."
@@ -52,4 +52,4 @@ T01: check
 include ../Makefile.common
 
 clean:
-	rm -f hello *.swf *.bc *.o *.exe *.txt *.i *.ii
+	rm -f hello hello-cpp *.swf *.bc *.o *.exe *.txt *.i *.ii

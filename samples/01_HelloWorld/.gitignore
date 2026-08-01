@@ -1,4 +1,5 @@
-*.exe
+hello
+hello-cpp
 *.swf
 *.swc
 *.o
