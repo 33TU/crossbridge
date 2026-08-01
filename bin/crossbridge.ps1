@@ -6,6 +6,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+# Full SDK: $env:CROSSBRIDGE_IMAGE = "ghcr.io/33tu/crossbridge:15.0.0.3-full"
 $image = if ([string]::IsNullOrWhiteSpace($env:CROSSBRIDGE_IMAGE)) {
     "ghcr.io/33tu/crossbridge:15.0.0.3-light"
 } else {

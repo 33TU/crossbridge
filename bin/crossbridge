@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Full SDK: CROSSBRIDGE_IMAGE=ghcr.io/33tu/crossbridge:15.0.0.3-full ./bin/crossbridge <command>
 image="${CROSSBRIDGE_IMAGE:-ghcr.io/33tu/crossbridge:15.0.0.3-light}"
 
 docker_args=(--rm -v "${PWD}:/work" -w /work -e FLEX=/opt/flex)
