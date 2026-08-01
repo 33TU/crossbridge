@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+image="${CROSSBRIDGE_IMAGE:-crossbridge:15.0.0.3-light}"
+
+docker_args=(--rm -v "${PWD}:/work" -e FLEX=/opt/flex)
+if [[ -t 0 && -t 1 ]]; then
+    docker_args+=(-it)
+fi
+
+if [[ $# -eq 0 ]]; then
+    set -- bash
+fi
+
+exec docker run "${docker_args[@]}" "$image" "$@"
