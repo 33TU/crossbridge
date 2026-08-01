@@ -45,4 +45,8 @@ N: Joé Dupuis
 W: https://github.com/twistedjoe
 D: Testing, URLLoaderVFS
 
+N: 33TU
+W: https://github.com/33TU
+D: Docker support, Linux fixes, modern build compatibility
+
 .. Add Your Details Here! ..

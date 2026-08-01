@@ -1,7 +1,6 @@
 Maintainer(s)
 ============
 
-## Andras Csizmadia
-* e-mail: andras[at]vpmedia.eu
-* github: www.github.com/vpmedia
-* website: www.linkedin.com/in/vpmedia
+## 33TU
+* github: https://github.com/33TU
+* website: https://33TU.dev
