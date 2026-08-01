@@ -18,23 +18,28 @@ usable on modern Linux, macOS, and Windows systems through Docker.
 
 ## Quick start
 
-Install Docker, clone this repository, and enter the samples directory:
+Install Docker, clone this repository, and enter it:
 
 ```sh
 git clone https://github.com/33TU/crossbridge.git
-cd crossbridge/samples
+cd crossbridge
 ```
 
-On Linux, macOS, WSL, or Git Bash:
+The usage examples below assume the repository's `bin/` directory is on
+`PATH`. On Windows, `crossbridge.ps1` is the equivalent PowerShell launcher.
+
+Now enter the samples directory and build Hello World:
 
 ```sh
-../bin/crossbridge make T01
+cd samples
+crossbridge make T01
 ```
 
-On Windows PowerShell:
+In PowerShell, invoke the PowerShell launcher by name:
 
 ```powershell
-..\bin\crossbridge.ps1 make T01
+Set-Location samples
+crossbridge.ps1 make T01
 ```
 
 The launcher pulls `ghcr.io/33tu/crossbridge:15.0.0.3-light` when necessary,
@@ -44,7 +49,7 @@ to the current directory.
 To compile only `hello.c`:
 
 ```sh
-../bin/crossbridge \
+crossbridge \
   gcc 01_HelloWorld/hello.c -emit-swf -swf-version=26 \
   -o 01_HelloWorld/hello.swf
 ```
@@ -66,14 +71,14 @@ Select the full image explicitly on Linux or macOS:
 
 ```sh
 CROSSBRIDGE_IMAGE=ghcr.io/33tu/crossbridge:15.0.0.3-full \
-  ../bin/crossbridge make T01
+  crossbridge make T13
 ```
 
 Or in PowerShell:
 
 ```powershell
 $env:CROSSBRIDGE_IMAGE = "ghcr.io/33tu/crossbridge:15.0.0.3-full"
-..\bin\crossbridge.ps1 make T01
+crossbridge.ps1 make T13
 ```
 
 CrossBridge is an x86-era toolchain, so the images target `linux/amd64`.
