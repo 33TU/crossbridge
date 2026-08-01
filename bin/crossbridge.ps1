@@ -7,7 +7,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 $image = if ([string]::IsNullOrWhiteSpace($env:CROSSBRIDGE_IMAGE)) {
-    "crossbridge:15.0.0.3-light"
+    "ghcr.io/33tu/crossbridge:15.0.0.3-light"
 } else {
     $env:CROSSBRIDGE_IMAGE
 }

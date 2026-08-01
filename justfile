@@ -1,6 +1,6 @@
 build_jobs := env("BUILD_JOBS", "16")
-light_image := env("CROSSBRIDGE_LIGHT_IMAGE", "crossbridge:15.0.0.3-light")
-full_image := env("CROSSBRIDGE_FULL_IMAGE", "crossbridge:15.0.0.3-full")
+light_image := env("CROSSBRIDGE_LIGHT_IMAGE", "ghcr.io/33tu/crossbridge:15.0.0.3-light")
+full_image := env("CROSSBRIDGE_FULL_IMAGE", "ghcr.io/33tu/crossbridge:15.0.0.3-full")
 
 # List available recipes.
 default:
