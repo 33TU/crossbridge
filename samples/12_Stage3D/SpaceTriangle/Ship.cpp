@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 #include "Ship.h"
-#include "Game.h"
+#include "game.h"
 #include <MathUtils.h>
 
 namespace SpaceTriangle

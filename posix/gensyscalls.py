@@ -525,6 +525,8 @@ def gen_vm_glue(syscall_list, header_file, impl_file):
     impl_file.write('#include <sys/msg.h>\n')
     impl_file.write('#include <sys/shm.h>\n')
     impl_file.write('#include <sys/socket.h>\n')
+    impl_file.write('#include <sys/resource.h>\n')
+    impl_file.write('#include <grp.h>\n')
 
     impl_file.write('#include "avmshell.h"\n')
     impl_file.write('#include "{0}.h"\n\n'.format(VM_GLUE_FILE_NAME))
@@ -784,5 +786,4 @@ acceptable_calls = [x for x in calls if can_gen(x)]
 
 gen_code(acceptable_calls)
 print 'generated {0} syscalls'.format(len(acceptable_calls))
-
 

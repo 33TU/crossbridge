@@ -28,7 +28,12 @@
 
 .PHONY: clean all 
 
-all: clean check T01 T02 T03 T04 T05 T06 T07 T08 T09 T10 T11 T12 T13  
+SAMPLE_TARGETS=T01 T02 T03 T04 T05 T06 T07 T08 T09 T10 T11 T12
+ifeq (,$(findstring 1,$(LIGHTSDK)))
+SAMPLE_TARGETS+=T13
+endif
+
+all: clean check $(SAMPLE_TARGETS)
 
 T01:
 	@cd 01_HelloWorld && make FLASCC="$(FLASCC)" FLEX="$(FLEX)"

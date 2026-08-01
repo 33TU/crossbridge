@@ -1,0 +1,7 @@
+build
+sdk
+.git
+**/.DS_Store
+**/*.swf
+**/*.exe
+**/*.o

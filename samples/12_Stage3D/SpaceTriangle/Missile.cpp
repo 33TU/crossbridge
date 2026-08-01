@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 #include "Missile.h"
-#include "Game.h"
+#include "game.h"
 #include "Ship.h"
 #include <MathUtils.h>
 
