@@ -35,13 +35,16 @@
 * text eol=lf
 
 # Explicit declaration of VS project files as CRLF
-*.dsp -crlf
-*.dsw -crlf
-*.sln -crlf
-*.vcproj -crlf
+*.dsp text eol=crlf
+*.dsw text eol=crlf
+*.sln text eol=crlf
+*.vcproj text eol=crlf
 
 # Explicit declaration of binary files that should not be modified
+*.a binary
 *.abc binary
+*.bc binary
+*.bin binary
 *.dll binary
 *.exe binary
 *.fla binary
@@ -55,7 +58,10 @@
 *.mov binary
 *.mp4 binary
 *.mp3 binary
+*.obj binary
+*.o binary
 *.pdf binary
+*.pgm binary
 *.png binary
 *.pyc binary
 *.psd binary
@@ -63,6 +69,7 @@
 *.swc binary
 *.tar binary
 *.ttf binary
+*.wav binary
 *.7z binary
 *.bz2 binary
 *.zip binary
