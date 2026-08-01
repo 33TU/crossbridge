@@ -71,7 +71,7 @@ case "$host" in
 	TARGET=X86_64; TARGETDIR=x86
 	;;
 
-  AVM2*-*-*)
+  AVM2*-*-* | avm2*-*-*)
 	TARGET=AVM2; TARGETDIR=avm2
 	;;
 
@@ -350,7 +350,7 @@ fi
 
 FFI_EXEC_TRAMPOLINE_TABLE=0
 case "$target" in
-     *arm*-apple-darwin*)
+     *arm*-apple-darwin* | AVM2*-*-* | avm2*-*-*)
        FFI_EXEC_TRAMPOLINE_TABLE=1
        AC_DEFINE(FFI_EXEC_TRAMPOLINE_TABLE, 1,
                  [Cannot use PROT_EXEC on this target, so, we revert to

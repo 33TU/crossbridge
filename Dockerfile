@@ -16,6 +16,8 @@ RUN apt-get update \
         openjdk-8-jdk-headless perl pkg-config python python-dev rsync texinfo \
         unzip uuid-dev xz-utils zip zlib1g-dev \
     && ln -s x86_64-linux-gnu/asm /usr/include/asm \
+    && ln -s /usr/bin/gcc-4.8 /usr/local/bin/gcc \
+    && ln -s /usr/bin/g++-4.8 /usr/local/bin/g++ \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL "https://archive.apache.org/dist/flex/${FLEX_VERSION}/binaries/apache-flex-sdk-${FLEX_VERSION}-bin.tar.gz" \
@@ -23,8 +25,8 @@ RUN curl -fsSL "https://archive.apache.org/dist/flex/${FLEX_VERSION}/binaries/ap
     && mv "/opt/apache-flex-sdk-${FLEX_VERSION}-bin" /opt/flex \
     && chmod +x /opt/flex/bin/*
 
-ENV CC=gcc-4.8 \
-    CXX=g++-4.8 \
+ENV CC=gcc \
+    CXX=g++ \
     FLEX_HOME=/opt/flex \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     PATH=/opt/flex/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH \
@@ -44,7 +46,7 @@ COPY . .
 RUN mkdir -p /opt/flex/frameworks/libs/player/15.0 \
     && cp tools/playerglobal/15.0/playerglobal.swc \
         /opt/flex/frameworks/libs/player/15.0/playerglobal.swc \
-    && make SHELL=/bin/bash CC=gcc-4.8 CXX=g++-4.8 \
+    && make SHELL=/bin/bash \
         THREADS="${BUILD_JOBS}" LIGHTSDK="${LIGHTSDK}" all
 
 FROM --platform=linux/amd64 ubuntu:16.04 AS crossbridge

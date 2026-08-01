@@ -3,7 +3,7 @@ set -euo pipefail
 
 image="${CROSSBRIDGE_IMAGE:-ghcr.io/33tu/crossbridge:15.0.0.3-light}"
 
-docker_args=(--rm -v "${PWD}:/work" -e FLEX=/opt/flex)
+docker_args=(--rm -v "${PWD}:/work" -w /work -e FLEX=/opt/flex)
 if [[ -t 0 && -t 1 ]]; then
     docker_args+=(-it)
 fi

@@ -160,7 +160,7 @@ $?TRIPLE=avm2-unknown-freebsd8
 # GNU Tool-chain and CC Options
 # ====================================================================================
 # Host Tools
-#$?CC_FOR_BUILD=gcc
+$?CC_FOR_BUILD=$(call nativepath,$(shell which $(CC))) -B/usr/bin/
 export CC:=$(CC)
 export CXX:=$(CXX)
 # linker tool (symbolic force no-dereference)
@@ -333,6 +333,7 @@ all_with_local_make:
 		done ; \
 		if [ $$mret -ne 0 ] ; then \
 			echo "Failed to build: $$target" ;\
+			cat $(BUILD)/logs/$$target.txt ; \
 			exit 1 ; \
 		fi ; \
 	done 
@@ -1224,7 +1225,7 @@ endif
 zlib:
 	rm -rf $(BUILD)/zlib
 	cp -r $(SRCROOT)/$(DEPENDENCY_ZLIB) $(BUILD)/zlib
-	cd $(BUILD)/zlib && PATH=$(SDK)/usr/bin:$(PATH) $(MAKE) -j$(THREADS) libz.a CFLAGS=$(CFLAGS) CXXFLAGS=$(CXXFLAGS) SFLAGS=-O4
+	cd $(BUILD)/zlib && PATH=$(SDK)/usr/bin:$(PATH) $(MAKE) -j$(THREADS) libz.a CC=$(SDK_CC) CFLAGS=$(CFLAGS) CXXFLAGS=$(CXXFLAGS) SFLAGS=-O4
 	$(RSYNC) $(BUILD)/zlib/zlib.h $(SDK)/usr/include/
 	$(RSYNC) $(BUILD)/zlib/libz.a $(SDK)/usr/lib/
 
@@ -1263,9 +1264,10 @@ dmalloc:
 
 # Compilers for high level languages generate code that follows certain conventions (MIT). 
 libffi:
+	rm -rf $(BUILD)/libffi
 	mkdir -p $(BUILD)/libffi
 	cd $(BUILD)/libffi && PATH=$(SDK)/usr/bin:$(PATH) $(SRCROOT)/$(DEPENDENCY_FFI)/configure \
-		--prefix=$(SDK)/usr --enable-static --disable-shared
+		--prefix=$(SDK)/usr --build=$(BUILD_TRIPLE) --host=$(TRIPLE) --target=$(TRIPLE) --enable-static --disable-shared
 	cd $(BUILD)/libffi && PATH=$(SDK)/usr/bin:$(PATH) $(MAKE) install
 	cd $(BUILD)/libffi/testsuite && PATH=$(SDK)/usr/bin:$(PATH) $(MAKE) check
 
@@ -1292,7 +1294,8 @@ libxml2:
 	rm -rf $(BUILD)/libxml2
 	mkdir -p $(BUILD)/libxml2
 	cd $(BUILD)/libxml2 && PATH=$(SDK)/usr/bin:$(PATH) $(SRCROOT)/$(DEPENDENCY_LIBXML)/configure \
-		--prefix=$(SDK)/usr --enable-static --disable-shared --without-ftp --without-http --without-html --without-python --without-history
+		--prefix=$(SDK)/usr --build=$(BUILD_TRIPLE) --host=$(TRIPLE) --target=$(TRIPLE) \
+		--enable-static --disable-shared --without-ftp --without-http --without-html --without-python --without-history
 	cd $(BUILD)/libxml2 && PATH=$(SDK)/usr/bin:$(PATH) $(MAKE) -i install
 
 # OpenGL-based programs must link with the libGL library. libGL implements the GLX interface as well as the main OpenGL API entrypoints. 
@@ -1362,7 +1365,7 @@ libwebp:
 libfreetype:
 	rm -rf $(BUILD)/libfreetype
 	mkdir -p $(BUILD)/libfreetype
-	cd $(BUILD)/libfreetype && PATH=$(SDK)/usr/bin:$(PATH) $(SRCROOT)/$(DEPENDENCY_LIBFREETYPE)/configure \
+	cd $(BUILD)/libfreetype && PATH=$(SDK)/usr/bin:$(PATH) CC_BUILD="$(CC_FOR_BUILD)" $(SRCROOT)/$(DEPENDENCY_LIBFREETYPE)/configure \
 		--prefix=$(SDK)/usr --build=$(BUILD_TRIPLE) --host=$(TRIPLE) --target=$(TRIPLE) --enable-static --disable-shared \
 		--disable-mmap --without-bzip2 --without-ats --without-old-mac-fonts
 	cd $(BUILD)/libfreetype && PATH=$(SDK)/usr/bin:$(PATH) $(MAKE)

@@ -46,8 +46,11 @@ endif
 $?ASC2=java -jar $(call nativepath,$(FLASCC)/usr/lib/asc2.jar) -merge -md -parallel
  
 # Auto Detect AIR/Flex SDKs
-ifneq "$(wildcard $(AIR_HOME)/lib/compiler.jar)" ""
+ifneq "$(wildcard $(FLEX)/bin/mxmlc)" ""
+else ifneq "$(wildcard $(AIR_HOME)/lib/compiler.jar)" ""
  $?FLEX=$(AIR_HOME)
+else ifneq "$(wildcard $(FLEX_HOME)/bin/mxmlc)" ""
+ $?FLEX=$(FLEX_HOME)
 else
  $?FLEX:=/path/to/adobe-air-sdk/
 endif
@@ -71,4 +74,3 @@ check:
 	else echo "Couldn't locate Adobe AIR or Apache Flex SDK directory, please invoke make with \"make FLEX=/path/to/AirOrFlex  ...\"" ; exit 1 ; \
 	fi
 	@echo "ASC2: $(ASC2)"
-

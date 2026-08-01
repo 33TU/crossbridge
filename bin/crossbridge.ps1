@@ -17,6 +17,8 @@ $dockerArguments = @(
     "--rm"
     "--mount"
     "type=bind,source=$($PWD.Path),target=/work"
+    "--workdir"
+    "/work"
     "-e"
     "FLEX=/opt/flex"
 )

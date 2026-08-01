@@ -12836,7 +12836,7 @@ case "$host" in
 	TARGET=X86_64; TARGETDIR=x86
 	;;
 
-  AVM2*-*-*)
+  AVM2*-*-* | avm2*-*-*)
 	TARGET=AVM2; TARGETDIR=avm2
 	;;
 
@@ -14098,7 +14098,7 @@ fi
 
 FFI_EXEC_TRAMPOLINE_TABLE=0
 case "$target" in
-     *arm*-apple-darwin* | AVM2*-*-*)
+     *arm*-apple-darwin* | AVM2*-*-* | avm2*-*-*)
        FFI_EXEC_TRAMPOLINE_TABLE=1
 
 $as_echo "#define FFI_EXEC_TRAMPOLINE_TABLE 1" >>confdefs.h
@@ -17004,4 +17004,3 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: unrecognized options: $ac_unrecognized_opts" >&5
 $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
-
